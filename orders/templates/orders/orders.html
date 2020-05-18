@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Bootstrap's CSS & Responsive meta tag -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <meta name="author" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+
+    <!-- Custom CSS, JS, and Icon -->
+    {% load static %}
+
+    <link rel="stylesheet" href="../../static/orders/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../static/orders/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="../../static/orders/css/animate.css" />
+    <link rel="stylesheet" href="../../static/orders/css/owl.carousel.css" />
+    <link rel="stylesheet" href="../../static/orders/css/owl.theme.default.min.css" />
+    <link rel="stylesheet" href="../../static/orders/css/magnific-popup.css" />
+    <link rel="stylesheet" href="../../static/orders/css/templatemo-style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="{% static '../../static/orders/js/script.js' %}"></script>
+    <link href="{% static 'orders/favicon.ico' %}" rel="icon">
+
+    <!-- Title -->
+    <title>PinocchiosPizza: Cart</title>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <section class="navbar custom-navbar navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                    <span class="icon icon-bar"></span>
+                </button>
+
+                <!-- lOGO TEXT HERE -->
+                <a href="{% url 'index' %}" class="navbar-brand">Pinocchio's Pizza</a>
+            </div>
+
+            <!-- MENU LINKS -->
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-nav-first">
+                    <li><a href="{% url 'index' %}" class="smoothScroll">Home</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    {% if request.user.is_authenticated %}
+                    <ul>
+                        {%if request.user.is_superuser %}
+                        <a class="nav-link section-btn" href="{% url 'show_order' %}">Orders</a>
+                        {% endif %}
+                        <a class="nav-link btn btn-primary" href="{% url 'cart_item' %}">Cart
+                            ({{ count }})</a>
+                        <a class="section-btn" href="{% url 'logout' %}">Log Out</a>
+                    </ul>
+                    {% else %}
+                    <ul>
+                        <a class="section-btn-register" href="{% url 'register' %}">Register</a>
+                        <a class="section-btn-register" href="{% url 'login' %}">Log In</a>
+                    </ul>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN -->
+    <div class="cart-wrapper">
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                <div class="jumbotron menu">
+                    <h3 class="orders-title">Orders</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <th>Order ID</th>
+                            <th>Ordered by</th>
+                            <th>Ordered on</th>
+                            <th>Total amount</th>
+                            <th>Order status</th>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr>
+                                <td>{{ order.id }}</td>
+                                <td>{{ order.user }}</td>
+                                <td>{{ order.date }}</td>
+                                <td>${{ order.total_order }}</td>
+                                <td>{{ order.status }}</td>
+
+                            </tr>
+
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap's JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+    <script src="../../static/orders/js/jquery.js"></script>
+    <script src="../../static/orders/js/bootstrap.min.js"></script>
+    <script src="../../static/orders/js/jquery.stellar.min.js"></script>
+    <script src="../../static/orders/js/wow.min.js"></script>
+    <script src="../../static/orders/js/owl.carousel.min.js"></script>
+    <script src="../../static/orders/js/jquery.magnific-popup.min.js"></script>
+    <script src="../../static/orders/js/smoothscroll.js"></script>
+    <script src="../../static/orders/js/custom.js"></script>
+</body>
+
+</html>
