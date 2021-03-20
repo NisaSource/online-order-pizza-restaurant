@@ -4,7 +4,7 @@ click==7.1.1
 Django==3.0.6
 Faker==4.0.3
 itsdangerous==1.1.0
-Jinja2==2.11.1
+Jinja2==2.11.3
 MarkupSafe==1.1.1
 passlib==1.7.2
 pep8==1.7.1
